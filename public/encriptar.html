@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Encriptador</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <h3 class="text-white">Encriptador</h3>
+          </a>
+
+          <a href="/" class="text-white" style="text-decoration: none;">Volver</a>
+        </div>
+    </nav>
+
+    <main class="row">
+       <section class="row p-4 fullHeight">
+           <div class="col-6 borderRight p-4" id="contenedorTextoEncriptar">
+               <h4 class="ms-5">Cargar PublicKey</h4>
+               <input type="file" id="fileInput" class="ms-5 mb-4">
+               <h4 class="ms-5">Texto a encriptar</h4> 
+               <textarea class="ms-5 mt-3" id="contenidoEncriptar"></textarea>
+               <button disabled class="btn btn-success ms-5 mt-3" id="btn">Encriptar</button>
+           </div>
+           <div class="col-6 p-4" id="contenedorContenidoEncriptado">
+              
+               <h4 class="ms-5">Texto encriptado</h4>
+               <button  class="btn btn-info ms-5" id="getMensaje">Obtener Mensaje</button>
+               <div class="ms-5 mt-3 contenidoEncriptado">
+                   <label for="" class="d-block">Algoritmo AES</label>
+                   <div class="mt-2 p-3 divEncriptado" >
+                    <p  class="parrafo" id="messageContent"></p>
+                   </div>
+               </div>
+               <div class="ms-5 mt-3 contenidoEncriptado">
+                   <label for="" class="d-block">Cifrado de clave AES con Algoritmo RSA</label>
+                   <div class="mt-2 p-3 divEncriptado">
+                    <p class="parrafo" id="KeyContent"></p> 
+                   </div>
+               </div>
+           </div>
+       </section>
+
+    </main>
+
+    <script src="index.js"></script>
+    <script src="validarInputs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </body>
+</html>

@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*{
+    font-family: "Inter", sans-serif;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.fullHeight{
+    height: 89vh;
+}
+
+.borderRight{
+    border-right: 1px solid #00000052 ;
+}
+
+#contenedorTextoEncriptar textarea{
+    width: 80%;
+    height: 60%;
+    resize: none;
+
+    padding: 20px;
+
+    border-radius: 8px;
+    border: 1px solid rgb(204, 204, 204);
+}
+
+#contenedorTextoEncriptar textarea:focus{
+    outline: 1px solid blue;
+}
+
+.btn{
+    width: 80%;
+}
+
+.divEncriptado{
+    width: 80%;
+    height: 80%;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    border-radius: 8px;
+    border: 1px solid rgb(204, 204, 204);
+
+    background-color: rgba(211, 211, 211, 0.37);
+}
+
+.divEncriptado::-webkit-scrollbar {
+    display: none; 
+}
+
+.contenidoEncriptado{
+    width: 100%;
+    height: 200px;
+}
+
+.copy-icon{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 100;
+}
+
+.copy-icon img{
+    width: 80%;
+    height: 80%;
+    
+}
+
+.copy-icon:hover{
+    border-radius: 3px;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.alerta-copy{
+    display: inline;
+    width: 10%;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    top: 5px;
+    left: 45%;
+    z-index: 10000;
+    background-color:rgba(0, 128, 0, 0.486);
+    border: 1px solid rgb(6, 155, 6);
+    font-weight: bold;
+    color: rgb(4, 32, 4);
+}
+
+.parrafo {
+    word-wrap: break-word; /* Permite que las palabras largas se dividan */
+    overflow-wrap: break-word; /* Para compatibilidad con navegadores más nuevos */
+    white-space: normal; /* Asegura que el texto se envuelva correctamente */
+}
