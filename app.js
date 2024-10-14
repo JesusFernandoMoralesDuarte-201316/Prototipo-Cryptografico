@@ -79,10 +79,13 @@ app.post('/AES',(req, res) => {
 });
 
 app.post('/Encrypt2',(req,res)=>{
-    const {mensaje,key} = res.body
+    const {parseMensaje,parseKey} = req.body
+    const mensaje = parseMensaje;
+    const key = parseKey;
+    
      // Ruta donde se guardarán los archivos temporalmente
-     const mensajePath = path.join(process.cwd(), 'publicKey.txt');
-     const KeyPath = path.join(process.cwd(), 'privateKey.txt');
+     const mensajePath = path.join(process.cwd(), 'mensajePath.txt');
+     const KeyPath = path.join(process.cwd(), 'KeyPath.txt');
  
      // Guardar las claves en archivos
      fs.writeFile(mensajePath, mensaje, (err) => {
@@ -90,29 +93,29 @@ app.post('/Encrypt2',(req,res)=>{
              return res.status(500).send('Error al guardar el mensaje.');
          }
  
-         fs.writeFile(privateKeyPath, privateKey, (err) => {
+         fs.writeFile(KeyPath,key, (err) => {
              if (err) {
-                 return res.status(500).send('Error al guardar la clave privada.');
+                 return res.status(500).send('Error al guardar la clave.');
              }
  
              // Crear un archivo zip
-             res.attachment('keys.zip');
+             res.attachment('mensaje.zip');
              const archive = archiver('zip');
  
              // Pipe archive data to the response
              archive.pipe(res);
  
              // Agregar los archivos al archivo zip
-             archive.file(publicKeyPath, { name: 'publicKey.txt' });
-             archive.file(privateKeyPath, { name: 'privateKey.txt' });
+             archive.file(mensajePath, { name: 'mensajeEncryptado.txt' });
+             archive.file(KeyPath, { name: 'KeyEncriptada.txt' });
  
              // Finalizar el archivo zip
              archive.finalize();
  
              // Eliminar archivos después de haber sido enviados
              archive.on('finish', () => {
-                 fs.unlink(publicKeyPath, () => {});
-                 fs.unlink(privateKeyPath, () => {});
+                 fs.unlink(mensajePath, () => {});
+                 fs.unlink(KeyPath, () => {});
              });
          });
      });

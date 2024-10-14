@@ -23,9 +23,6 @@ function validateParagraphs() {
     getMensaje.disabled = !(textExists1 && textExists2);
 }
 
-// Agregar eventos para la validación
-KeyContent.addEventListener('input', validateParagraphs);
-messageContent.addEventListener('input', validateParagraphs);
 
 
 // Agregar eventos para la validación
@@ -34,27 +31,43 @@ textArea.addEventListener('input', validateInputs);
 
 
 getMensaje.addEventListener('click',()=>{
-    EnviarMensajeEncrypt(KeyContent,messageContent)
+    EnviarMensajeEncrypt(KeyContent.textContent,messageContent.textContent)
+
+
 })
 
-async function EnviarMensajeEncrypt(key,mensaje) {
+async function EnviarMensajeEncrypt(key, mensaje) {
     const url = '/Encrypt2'; // Cambia esto por tu URL de API
+    const parseMensaje = mensaje.toString();
+    const parseKey = key.toString();
 
     try {
         const response = await fetch(url, {
-            method: 'POST', // Método HTTP
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Indica que estás enviando JSON
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ mensaje , key }) // Asegúrate de que estás enviando como un objeto
+            body: JSON.stringify({ parseMensaje, parseKey }),
         });
 
         if (!response.ok) {
             throw new Error(`Error en la solicitud: ${response.statusText}`);
         }
 
-        const result = await response.json(); // Procesa la respuesta JSON
-        return result;
+        // Procesa la respuesta como un blob para manejar el archivo ZIP
+        const blob = await response.blob();
+
+        // Crear un enlace para descargar el archivo
+        const urlBlob = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = urlBlob;
+        a.download = 'mensaje.zip'; // Nombre del archivo a descargar
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        // Liberar el objeto URL creado
+        window.URL.revokeObjectURL(urlBlob);
     } catch (error) {
         console.error('Error al enviar datos:', error);
     }
